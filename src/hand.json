@@ -1,0 +1,96 @@
+{
+  "player1": [
+    {
+      "id": 1,
+      "name": "Jerry",
+      "top": 1,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 1
+    },
+    {
+      "id": 2,
+      "name": "Jerry",
+      "top": 1,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 1
+    },
+    {
+      "id": 3,
+      "name": "Jerry",
+      "top": 1,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 1
+    },
+    {
+      "id": 4,
+      "name": "Jerry",
+      "top": 1,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 1
+    },
+    {
+      "id": 5,
+      "name": "Jerry",
+      "top": 1,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 1
+    }
+  ],
+  "player2": [
+    {
+      "id": 1,
+      "name": "Tom",
+      "top": 9,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 2
+    },
+    {
+      "id": 2,
+      "name": "Tom",
+      "top": 1,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 2
+    },
+    {
+      "id": 3,
+      "name": "Tom",
+      "top": 1,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 2
+    },
+    {
+      "id": 4,
+      "name": "Tom",
+      "top": 1,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 2
+    },
+    {
+      "id": 5,
+      "name": "Tom",
+      "top": 1,
+      "left": 2,
+      "bottom": 3,
+      "right": 4,
+      "belongsTo": 2
+    }
+  ]
+}
