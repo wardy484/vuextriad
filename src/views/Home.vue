@@ -4,13 +4,17 @@
 
     <div class="flex container text-center">
       <div class="w-2/12">
-        <div class="bg-blue-500 w-full h-32 mb-5" v-for="(card, index) in player1" :key="card.id">
+        <div
+          class="bg-blue-500 w-full h-32 mb-5"
+          v-for="(card, index) in player1Hand.cards"
+          :key="card.id"
+        >
           <card :card="card" @click.native="selectCard({ index, hand: 1})" />
         </div>
       </div>
 
       <div class="flex w-8/12 p-5 flex-wrap content-center justify-center">
-        <div v-for="(row, x) in cells" :key="x" class="flex w-full">
+        <div v-for="(row, x) in board.rows" :key="x" class="flex w-full">
           <cell
             v-for="(cell, y) in row"
             :key="y"
@@ -22,7 +26,11 @@
       </div>
 
       <div class="w-2/12">
-        <div class="bg-blue-500 w-full h-32 mb-5" v-for="(card, index) in player2" :key="card.id">
+        <div
+          class="bg-blue-500 w-full h-32 mb-5"
+          v-for="(card, index) in player2Hand.cards"
+          :key="card.id"
+        >
           <card :card="card" @click.native="selectCard({ index, hand: 2})" />
         </div>
       </div>
@@ -57,8 +65,14 @@ export default {
   },
 
   computed: {
-    ...mapState(["selectedCard", "cells", "currentPlayer"]),
-    ...mapGetters(["player1", "player2", "player1Score", "player2Score"])
+    ...mapState([
+      "selectedCard",
+      "board",
+      "currentPlayer",
+      "player1Hand",
+      "player2Hand"
+    ]),
+    ...mapGetters(["player1Score", "player2Score"])
   }
 };
 </script>

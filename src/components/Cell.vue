@@ -14,10 +14,10 @@ export default {
   },
 
   computed: {
-    ...mapState(["cells"]),
+    ...mapState(["board"]),
 
     cell() {
-      return this.cells[this.xPosition][this.yPosition];
+      return this.board.getCell(this.xPosition, this.yPosition);
     }
   },
 

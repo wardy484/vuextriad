@@ -1,3 +1,5 @@
+import Card from "./Card";
+
 export default class Cell {
   constructor() {
     this.hasCard = false;
@@ -6,7 +8,7 @@ export default class Cell {
 
   placeCard(card) {
     if (!this.hasCard && typeof card !== "undefined") {
-      this.card = card;
+      this.card = new Card(card);
       this.hasCard = true;
     }
   }

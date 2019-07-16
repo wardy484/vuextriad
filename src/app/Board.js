@@ -1,8 +1,8 @@
-import Cell from "./app/Cell";
+import Cell from "./Cell";
 
 export default class Board {
   constructor() {
-    this.board = [
+    this.rows = [
       [new Cell(), new Cell(), new Cell()],
       [new Cell(), new Cell(), new Cell()],
       [new Cell(), new Cell(), new Cell()]
@@ -10,14 +10,40 @@ export default class Board {
   }
 
   placeCard(row, column, card) {
-    this.getCell(row, column).placeCard(card);
+    const cell = this.getCell(row, column);
+
+    cell.placeCard(card);
+
+    this.compareCards(row, column, card);
+  }
+
+  compareCards(row, column, card) {
+    this.check(row - 1, column, "bottom", card.top, card.belongsTo);
+    this.check(row + 1, column, "top", card.bottom, card.belongsTo);
+    this.check(row, column + 1, "left", card.right, card.belongsTo);
+    this.check(row, column - 1, "right", card.left, card.belongsTo);
+  }
+
+  check(row, column, direction, amount, player) {
+    const cell = this.getCell(row, column);
+
+    if (
+      cell &&
+      cell.hasCard &&
+      cell.card.doesNotBelongTo(player) &&
+      cell.card.directionIsLessThan(direction, amount)
+    ) {
+      cell.card.flip();
+    }
   }
 
   getCell(row, column) {
-    return this.board[row][column];
+    if (this.cellExists(row, column)) {
+      return this.rows[row][column];
+    }
   }
 
   cellExists(row, column) {
-    return this.board[row] && this.board[row][column];
+    return this.rows[row] && this.rows[row][column];
   }
 }

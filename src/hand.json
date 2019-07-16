@@ -60,7 +60,7 @@
       "id": 2,
       "name": "Tom",
       "top": 1,
-      "left": 2,
+      "left": 10,
       "bottom": 3,
       "right": 4,
       "belongsTo": 2
