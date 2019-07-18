@@ -10,6 +10,7 @@ Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
+    inGame: false,
     currentPlayer: 1,
     selectedCard: null,
     board: new Board(),
@@ -19,11 +20,17 @@ const store = new Vuex.Store({
 
   getters: {
     player1Score(state) {
-      return ScoreCalculator(state.player1Hand, state.board.getCellsBelongingToPlayer(1));
+      return ScoreCalculator(
+        state.player1Hand,
+        state.board.getCellsBelongingToPlayer(1)
+      );
     },
 
     player2Score(state) {
-      return ScoreCalculator(state.player2Hand, state.board.getCellsBelongingToPlayer(2));
+      return ScoreCalculator(
+        state.player2Hand,
+        state.board.getCellsBelongingToPlayer(2)
+      );
     },
 
     currentCard(state, getters) {
@@ -55,10 +62,22 @@ const store = new Vuex.Store({
 
     setCurrentPlayer(state, newPlayer) {
       state.currentPlayer = newPlayer;
+    },
+
+    setGame(state, value) {
+      state.inGame = value;
+    },
+
+    setPlayer1Hand(state, hand) {
+      state.player1Hand = hand;
     }
   },
 
   actions: {
+    startGame({ commit }) {
+      commit("setGame", true);
+    },
+
     selectCard({ state, commit }, { index, hand }) {
       if (state.currentPlayer === hand) {
         commit("setSelectedCard", index);

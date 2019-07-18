@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "name": "Geezard",
+    "top": 1,
+    "right": 4,
+    "bottom": 1,
+    "left": 5,
+    "image": "001.png",
+    "selected": false
+  },
+
+  {
+    "id": 2,
+    "name": "Funguar",
+    "top": 5,
+    "right": 1,
+    "bottom": 1,
+    "left": 3,
+    "image": "002.png",
+    "selected": false
+  },
+
+  {
+    "id": 3,
+    "name": "Bite Bug",
+    "top": 1,
+    "right": 3,
+    "bottom": 3,
+    "left": 5,
+    "image": "003.png",
+    "selected": false
+  },
+
+  {
+    "id": 4,
+    "name": "Blobra",
+    "top": 2,
+    "right": 3,
+    "bottom": 1,
+    "left": 5,
+    "image": "005.png",
+    "selected": false
+  },
+
+  {
+    "id": 5,
+    "name": "Gayla",
+    "top": 2,
+    "right": 1,
+    "bottom": 4,
+    "left": 4,
+    "image": "006.png",
+    "selected": false
+  },
+
+  {
+    "id": 6,
+    "name": "Gesper",
+    "top": 1,
+    "right": 5,
+    "bottom": 4,
+    "left": 1,
+    "image": "007.png",
+    "selected": false
+  },
+
+  {
+    "id": 7,
+    "name": "Red Bats",
+    "top": 6,
+    "right": 1,
+    "bottom": 1,
+    "left": 2,
+    "image": "004.png",
+    "selected": false
+  }
+]

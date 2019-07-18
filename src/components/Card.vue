@@ -1,17 +1,19 @@
 <template>
   <div
-    class="h-full w-full text-white text-2xl text-bold p-2 flex flex-col justify-between"
-    :class="bgColor"
+    class="h-full w-full text-white text-2xl text-bold p-2 flex flex-col justify-between bg-cover bg-no-repeat bg-center"
+    :class="classes"
+    :style="bgImage(card.image)"
   >
-    <div class="w-full">{{ card.top }}</div>
+    <div class="w-3/12 leading-none mt-2 ml-2">
+      <div class="w-full">{{ card.top }}</div>
 
-    <div class="w-full flex justify-between">
-      <span>{{ card.left }}</span>
-      <span>{{ card.name }}</span>
-      <span>{{ card.right }}</span>
+      <div class="w-full flex justify-between">
+        <span>{{ card.left }}</span>
+        <span>{{ card.right }}</span>
+      </div>
+
+      <div class="w-full">{{ card.bottom }}</div>
     </div>
-
-    <div class="w-full">{{ card.bottom }}</div>
   </div>
 </template>
 
@@ -23,13 +25,25 @@ export default {
     }
   },
 
-  computed: {
-    bgColor() {
-      if (this.card.belongsTo === 1) {
-        return "bg-blue-500";
-      }
+  data() {
+    return {
+      selected: false
+    };
+  },
 
-      return "bg-red-500";
+  computed: {
+    classes() {
+      return {
+        "bg-red-500": this.card.belongsTo && this.card.belongsTo !== 1,
+        "bg-blue-500": !this.card.belongsTo || this.card.belongsTo !== 2,
+        "border-4 border-black": this.card.selected
+      };
+    }
+  },
+
+  methods: {
+    bgImage(card) {
+      return "background-image: url('cards/" + card + "')";
     }
   }
 };
