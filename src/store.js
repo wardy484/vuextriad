@@ -4,6 +4,7 @@ import Board from "./app/Board";
 
 import data from "@/hand.json";
 import Hand from "./app/Hand";
+import ScoreCalculator from "./app/ScoreCalculator";
 
 Vue.use(Vuex);
 
@@ -18,38 +19,18 @@ const store = new Vuex.Store({
 
   getters: {
     player1Score(state) {
-      // let score = state.players[0].length;
-
-      // state.cells.forEach(row => {
-      //   row.forEach(col => {
-      //     if (col.hasCard && col.card.belongsTo === 1) {
-      //       score++;
-      //     }
-      //   });
-      // });
-
-      return 5;
+      return ScoreCalculator(state.player1Hand, state.board.getCellsBelongingToPlayer(1));
     },
 
     player2Score(state) {
-      // let score = state.players[1].length;
-
-      // state.cells.forEach(row => {
-      //   row.forEach(col => {
-      //     if (col.hasCard && col.card.belongsTo === 2) {
-      //       score++;
-      //     }
-      //   });
-      // });
-
-      return 5;
+      return ScoreCalculator(state.player2Hand, state.board.getCellsBelongingToPlayer(2));
     },
 
     currentCard(state, getters) {
-      return getters.currentPlayersHard.getCard(state.selectedCard);
+      return getters.currentPlayersCard.getCard(state.selectedCard);
     },
 
-    currentPlayersHard(state) {
+    currentPlayersCard(state) {
       switch (state.currentPlayer) {
         case 1:
           return state.player1Hand;
@@ -98,7 +79,7 @@ const store = new Vuex.Store({
       });
 
       commit("removeCardFromHand", {
-        player: getters.currentPlayersHard,
+        player: getters.currentPlayersCard,
         index: state.selectedCard
       });
 

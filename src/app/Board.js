@@ -46,4 +46,10 @@ export default class Board {
   cellExists(row, column) {
     return this.rows[row] && this.rows[row][column];
   }
+
+  getCellsBelongingToPlayer(player) {
+    return this.rows.flat().filter(cell => {
+        return cell.hasCard && cell.card.belongsTo === player;
+    });
+  }
 }
