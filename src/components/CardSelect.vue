@@ -1,7 +1,14 @@
 <template>
   <div class="flex text-center flex-row flex-wrap justify-center container">
-    <div class="bg-blue-500 h-56 w-1/6 m-5" v-for="(card, index) in cards" :key="index">
+    <div class="h-56 w-1/6 m-5" v-for="(card, index) in cards" :key="index">
       <card :card="card" @click.native="selectCard(card)" />
+    </div>
+
+    <div class="container flex justify-center">
+      <div
+        class="text-red-600"
+        v-if="showError && !this.hasSelectedFiveCards"
+      >You must select 5 cards to continue...</div>
     </div>
 
     <div class="container flex justify-end">
@@ -28,7 +35,8 @@ export default {
   data() {
     return {
       cards: Cards,
-      hand: new Hand([])
+      hand: new Hand([]),
+      showError: false
     };
   },
 
@@ -37,7 +45,7 @@ export default {
     ...mapMutations(["setPlayer1Hand"]),
 
     selectCard(card) {
-      if (this.hand.cards.length < 5 && !card.selected) {
+      if (!this.hasSelectedFiveCards && !card.selected) {
         card.belongsTo = 1;
 
         this.hand.addCard(card);
@@ -51,8 +59,19 @@ export default {
     },
 
     start() {
-      this.setPlayer1Hand(this.hand);
-      this.startGame();
+      if (this.hasSelectedFiveCards) {
+        this.setPlayer1Hand(this.hand);
+        this.startGame();
+        this.$router.push({ name: "game" });
+      } else {
+        this.showError = true;
+      }
+    }
+  },
+
+  computed: {
+    hasSelectedFiveCards() {
+      return this.hand.cards.length >= 5;
     }
   }
 };

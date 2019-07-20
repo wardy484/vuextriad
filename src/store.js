@@ -2,11 +2,20 @@ import Vue from "vue";
 import Vuex from "vuex";
 import Board from "./app/Board";
 
-import data from "@/hand.json";
+import Cards from "@/data/cards.json";
 import Hand from "./app/Hand";
 import ScoreCalculator from "./app/ScoreCalculator";
 
 Vue.use(Vuex);
+
+const p2 = new Hand([]);
+
+for (var i = 0; i < 5; i++) {
+  const card = { ...Cards[i] };
+  card.belongsTo = 2;
+
+  p2.addCard(card);
+}
 
 const store = new Vuex.Store({
   state: {
@@ -14,8 +23,8 @@ const store = new Vuex.Store({
     currentPlayer: 1,
     selectedCard: null,
     board: new Board(),
-    player1Hand: new Hand([...data.player1]),
-    player2Hand: new Hand([...data.player2])
+    player1Hand: new Hand([]),
+    player2Hand: p2
   },
 
   getters: {
@@ -78,9 +87,15 @@ const store = new Vuex.Store({
       commit("setGame", true);
     },
 
-    selectCard({ state, commit }, { index, hand }) {
+    selectCard({ state, commit, getters }, { index, hand }) {
       if (state.currentPlayer === hand) {
+        if (getters.currentCard) {
+          getters.currentCard.selected = false;
+        }
+
         commit("setSelectedCard", index);
+
+        getters.currentCard.selected = true;
       }
     },
 

@@ -49,7 +49,20 @@ export default class Board {
 
   getCellsBelongingToPlayer(player) {
     return this.rows.flat().filter(cell => {
-        return cell.hasCard && cell.card.belongsTo === player;
+      return cell.hasCard && cell.card.belongsTo === player;
     });
+  }
+
+  isFull() {
+    console.log(
+      this.rows.flat().filter(cell => {
+        return cell.hasCard;
+      }).length
+    );
+    return (
+      this.rows.flat().filter(cell => {
+        return cell.hasCard;
+      }).length === 8
+    );
   }
 }

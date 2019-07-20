@@ -1,10 +1,10 @@
 <template>
   <div
-    class="h-full w-full text-white text-2xl text-bold p-2 flex flex-col justify-between bg-cover bg-no-repeat bg-center"
+    class="relative h-full w-full text-white text-2xl text-bold rounded-lg flex flex-col justify-between"
     :class="classes"
-    :style="bgImage(card.image)"
   >
-    <div class="w-3/12 leading-none mt-2 ml-2">
+    <img :src="bgImage(card.image)" class="w-full h-full" />
+    <div class="w-3/12 leading-none mt-2 ml-2 absolute p-2">
       <div class="w-full">{{ card.top }}</div>
 
       <div class="w-full flex justify-between">
@@ -43,7 +43,7 @@ export default {
 
   methods: {
     bgImage(card) {
-      return "background-image: url('cards/" + card + "')";
+      return "http://localhost:8081/cards/" + card;
     }
   }
 };

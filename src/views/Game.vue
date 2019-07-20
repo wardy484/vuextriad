@@ -1,20 +1,10 @@
 <template>
   <div class="flex h-screen w-screen content-center justify-center flex-wrap pt-10">
-    <card-select class="mt-10" v-if="!inGame" />
-
-    <div v-else class="w-full container">
+    <div class="w-full container">
       <h1 class="text-3xl w-full text-center">Player: {{ currentPlayer }}</h1>
 
       <div class="flex container text-center">
-        <div class="w-2/12">
-          <div
-            class="bg-blue-500 w-full h-48 mb-5"
-            v-for="(card, index) in player1Hand.cards"
-            :key="card.id"
-          >
-            <card :card="card" @click.native="selectCard({ index, hand: 1})" />
-          </div>
-        </div>
+        <hand :player="1" />
 
         <div class="flex w-8/12 p-5 flex-wrap content-center justify-center">
           <div v-for="(row, x) in board.rows" :key="x" class="flex w-full">
@@ -28,15 +18,7 @@
           </div>
         </div>
 
-        <div class="w-2/12">
-          <div
-            class="bg-blue-500 w-full h-48 mb-5"
-            v-for="(card, index) in player2Hand.cards"
-            :key="card.id"
-          >
-            <card :card="card" @click.native="selectCard({ index, hand: 2})" />
-          </div>
-        </div>
+        <hand :player="2" />
       </div>
       <div class="container flex justify-between">
         <div class="text-2xl text-bold">Score: {{ player1Score }}</div>
@@ -49,37 +31,40 @@
 <script>
 import Cell from "@/components/Cell";
 import Card from "@/components/Card";
-import CardSelect from "@/components/CardSelect";
+import Hand from "@/components/Hand";
 
-import { mapGetters, mapState, mapActions } from "vuex";
+import { mapGetters, mapState, mapActions, mapMutations } from "vuex";
+import { setTimeout } from "timers";
 
 export default {
-  name: "home",
-
   components: {
     Cell,
     Card,
-    CardSelect
-  },
-
-  data() {
-    return {};
+    Hand
   },
 
   methods: {
-    ...mapActions(["selectCard", "playSelectedCard", "startGame"])
+    ...mapActions(["playSelectedCard"]),
+    ...mapMutations(["setGame"])
   },
 
   computed: {
-    ...mapState([
-      "selectedCard",
-      "board",
-      "currentPlayer",
-      "player1Hand",
-      "player2Hand",
-      "inGame"
-    ]),
+    ...mapState(["selectedCard", "board", "currentPlayer", "inGame"]),
     ...mapGetters(["player1Score", "player2Score"])
+  },
+
+  watch: {
+    board: {
+      deep: true,
+      handler(board) {
+        if (board.isFull()) {
+          setTimeout(() => {
+            this.$router.push({ name: "end" });
+            this.setGame(false);
+          }, 2000);
+        }
+      }
+    }
   }
 };
 </script>

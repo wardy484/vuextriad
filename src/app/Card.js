@@ -1,5 +1,5 @@
 export default class Card {
-  constructor({ id, name, top, right, bottom, left, belongsTo }) {
+  constructor({ id, name, top, right, bottom, left, belongsTo, image }) {
     this.id = id;
     this.name = name;
     this.top = top;
@@ -7,6 +7,7 @@ export default class Card {
     this.bottom = bottom;
     this.left = left;
     this.belongsTo = belongsTo;
+    this.image = image;
   }
 
   flip() {
